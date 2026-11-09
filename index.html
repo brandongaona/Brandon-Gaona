@@ -5,336 +5,400 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brandon Gaona</title>
 <meta name="description" content="Brandon Gaona — CS and Math at Stevens Institute of Technology. Machine learning, quantitative research, and systems projects.">
+<meta name="theme-color" content="#141414">
 <meta property="og:title" content="Brandon Gaona">
 <meta property="og:description" content="CS and Math at Stevens. Machine learning, quantitative research, and systems projects.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232B50D6'/%3E%3Ccircle cx='22' cy='24' r='5' fill='%23fff'/%3E%3Ccircle cx='42' cy='22' r='5' fill='%23fff' opacity='.7'/%3E%3Ccircle cx='32' cy='42' r='5' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23141414'/%3E%3Ctext x='32' y='49' text-anchor='middle' font-family='Impact,Arial Black,sans-serif' font-size='46' fill='%23E50914'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#16202B; --muted:#5B6875; --line:#D5DCE3;
-  --accent:#2B50D6; --accent-ink:#FFFFFF;
-  --c1:#2B50D6; --c2:#1F8A7A; --c3:#C98A1B; --c4:#8A4FB0; --c5:#C2453B; --noise:#9AA6B2;
-  --display:"Bricolage Grotesque", system-ui, sans-serif;
-  --body:"Schibsted Grotesk", system-ui, sans-serif;
-  --max:1120px;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0F151C; --surface:#17202A; --ink:#E6EBF0; --muted:#93A1AE; --line:#26323E;
-    --accent:#7C9BFF; --accent-ink:#0F151C;
-    --c1:#7C9BFF; --c2:#4CC2B0; --c3:#E6B04F; --c4:#B98AE0; --c5:#EE7B70; --noise:#4A5866;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0F151C; --surface:#17202A; --ink:#E6EBF0; --muted:#93A1AE; --line:#26323E;
-  --accent:#7C9BFF; --accent-ink:#0F151C;
-  --c1:#7C9BFF; --c2:#4CC2B0; --c3:#E6B04F; --c4:#B98AE0; --c5:#EE7B70; --noise:#4A5866;
+  --bg:#141414; --bg-2:#181818; --card:#232323; --ink:#FFFFFF; --soft:#D2D2D2; --muted:#9A9A9A; --line:#2F2F2F;
+  --red:#E50914; --red-dark:#B20710; --green:#46D369;
+  --logo:"Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  --body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pad:clamp(16px,4vw,60px);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;background:var(--bg)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.locked{overflow:hidden}
 a{color:inherit}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-@media (max-width:600px){.wrap{padding:0 16px}}
+:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* nav */
-.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
-.nav.scrolled{border-bottom-color:var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-.brand{font-family:var(--display);font-weight:800;font-size:19px;text-decoration:none;letter-spacing:-.01em}
-.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;align-items:center}
-.nav ul a{text-decoration:none;color:var(--muted);font-size:15px;font-weight:500}
-.nav ul a:hover{color:var(--ink)}
-.theme{background:none;border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
-@media (max-width:720px){.nav ul li.hide-sm{display:none}}
+/* ---------- profile gate ---------- */
+.gate{position:fixed;inset:0;z-index:100;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 16px;text-align:center}
+.gate.show{display:flex;animation:fade .5s ease}
+.gate.leaving{animation:zoomout .55s ease forwards}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes zoomout{to{opacity:0;transform:scale(1.15)}}
+.gate .logo{position:absolute;top:22px;left:var(--pad)}
+.gate h1{font-weight:500;font-size:clamp(30px,5vw,56px);letter-spacing:-.01em;margin:0 0 clamp(24px,4vw,40px)}
+.profiles{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,2.4vw,32px);list-style:none;margin:0;padding:0;max-width:980px}
+.profile{background:none;border:0;padding:0;cursor:pointer;color:var(--muted);font:inherit;display:flex;flex-direction:column;align-items:center;gap:12px;width:clamp(96px,13vw,150px)}
+.avatar{width:100%;aspect-ratio:1;border-radius:6px;display:grid;place-items:center;border:3px solid transparent;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.avatar::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.18),transparent 55%)}
+.avatar svg{width:42%;height:42%;color:#fff;position:relative;z-index:1}
+.profile span{font-size:clamp(13px,1.3vw,17px);transition:color .2s}
+.profile:hover .avatar,.profile:focus-visible .avatar{border-color:#fff;transform:scale(1.04)}
+.profile:hover span,.profile:focus-visible span{color:#fff}
+.profile:focus-visible{outline:none}
+.gate .skip{margin-top:clamp(32px,5vw,56px);background:none;border:1px solid var(--muted);color:var(--muted);font:inherit;font-size:14px;letter-spacing:.2em;text-transform:uppercase;padding:10px 26px;cursor:pointer}
+.gate .skip:hover{color:#fff;border-color:#fff}
 
-/* hero */
-.hero{padding:72px 0 56px}
-.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:36px}.hero{padding:40px 0 32px}}
-.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(48px,8vw,92px);line-height:.95;letter-spacing:-.035em;margin:0 0 24px}
-.hero .lede{font-size:clamp(18px,2vw,21px);color:var(--muted);max-width:34ch;margin:0 0 32px;line-height:1.5}
-.hero .lede strong{color:var(--ink);font-weight:600}
+/* ---------- nav ---------- */
+.logo{font-family:var(--logo);color:var(--red);font-size:clamp(28px,3vw,36px);letter-spacing:.03em;line-height:1;text-decoration:none;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:clamp(16px,3vw,44px);height:68px;padding:0 var(--pad);background:linear-gradient(180deg,rgba(0,0,0,.75),transparent);transition:background-color .35s}
+.nav.solid{background-color:var(--bg)}
+.nav ul{display:flex;gap:clamp(14px,1.8vw,22px);list-style:none;margin:0;padding:0;font-size:14px}
+.nav ul a{text-decoration:none;color:var(--soft);transition:color .2s}
+.nav ul a:hover{color:#fff}
+.nav .right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.nav .who{background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:8px;color:#fff;font:inherit;font-size:14px}
+.nav .who i{width:32px;height:32px;border-radius:4px;background:linear-gradient(135deg,#E50914,#7a0a10);display:grid;place-items:center;font-style:normal;font-family:var(--logo);font-size:20px}
+@media (max-width:820px){.nav ul{display:none}}
+@media (max-width:420px){.nav .who em{display:none}}
+
+/* ---------- billboard ---------- */
+.billboard{position:relative;min-height:min(92vh,860px);display:flex;align-items:flex-end;padding:120px var(--pad) clamp(90px,14vh,170px);overflow:hidden;isolation:isolate}
+.billboard .art{position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(60% 70% at 78% 35%,rgba(229,9,20,.55),transparent 70%),
+  radial-gradient(40% 50% at 95% 90%,rgba(120,20,140,.45),transparent 70%),
+  radial-gradient(50% 60% at 55% 10%,rgba(255,120,40,.18),transparent 70%),
+  #0b0b0b}
+.billboard .art::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(70% 80% at 75% 40%,#000,transparent 75%);-webkit-mask-image:radial-gradient(70% 80% at 75% 40%,#000,transparent 75%)}
+.billboard .art::after{content:"BG";position:absolute;right:-2vw;top:50%;transform:translateY(-55%);font-family:var(--logo);font-size:clamp(220px,42vw,620px);line-height:.8;color:rgba(255,255,255,.06);letter-spacing:-.02em}
+.billboard::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(20,20,20,.92) 0%,rgba(20,20,20,.55) 40%,transparent 75%),linear-gradient(0deg,var(--bg) 0%,transparent 35%)}
+.bb-inner{max-width:640px}
+.series{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.32em;color:var(--soft);font-weight:600;margin-bottom:14px}
+.series b{font-family:var(--logo);color:var(--red);font-size:30px;letter-spacing:0;line-height:1;font-weight:400}
+.billboard h1{font-family:var(--logo);font-weight:400;font-size:clamp(68px,11vw,150px);line-height:.86;letter-spacing:.01em;margin:0 0 18px;text-shadow:0 4px 24px rgba(0,0,0,.5)}
+.top10{display:flex;align-items:center;gap:10px;font-weight:700;font-size:clamp(16px,1.6vw,20px);margin-bottom:12px}
+.top10 i{font-style:normal;background:var(--red);color:#fff;font-family:var(--logo);font-size:13px;line-height:1;padding:5px 4px 3px;border-radius:2px;text-align:center;letter-spacing:.02em}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:15px;color:var(--soft);margin-bottom:14px}
+.meta .match{color:var(--green);font-weight:700}
+.meta .tag{border:1px solid rgba(255,255,255,.4);padding:0 6px;font-size:12px;border-radius:3px}
+.billboard p.lede{font-size:clamp(16px,1.6vw,20px);line-height:1.45;color:#eee;margin:0 0 24px;max-width:46ch;text-shadow:0 2px 8px rgba(0,0,0,.6)}
 .actions{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--surface)}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn:hover{transform:translateY(-1px)}
-.btn svg{width:17px;height:17px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:11px 26px 11px 20px;border-radius:4px;font-weight:700;font-size:clamp(15px,1.4vw,18px);text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:background-color .2s,opacity .2s}
+.btn svg{width:24px;height:24px;flex:none}
+.btn.play{background:#fff;color:#000}
+.btn.play:hover{background:rgba(255,255,255,.75)}
+.btn.info{background:rgba(109,109,110,.7);color:#fff}
+.btn.info:hover{background:rgba(109,109,110,.45)}
+.btn.red{background:var(--red);color:#fff}
+.btn.red:hover{background:var(--red-dark)}
 
-.figure{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:14px;position:relative}
-.figure canvas{display:block;width:100%;aspect-ratio:1/0.82;border-radius:14px}
-.figure figcaption{font-size:13.5px;color:var(--muted);padding:12px 6px 2px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.figure button{font:inherit;font-size:13.5px;background:none;border:0;color:var(--accent);cursor:pointer;padding:0;font-weight:600}
+/* ---------- rows ---------- */
+main{position:relative;z-index:1;margin-top:clamp(-110px,-9vh,-50px)}
+.row{margin:0 0 clamp(34px,4.5vw,56px);scroll-margin-top:80px}
+.row-head{display:flex;align-items:baseline;gap:14px;padding:0 var(--pad);margin-bottom:10px}
+.row h2{font-size:clamp(18px,1.8vw,24px);font-weight:700;margin:0;letter-spacing:-.005em}
+.row-head .explore{font-size:13px;color:#54b9c5;text-decoration:none;font-weight:600;opacity:.9}
+.row-head .explore:hover{text-decoration:underline}
+.slider{position:relative}
+.track{display:flex;gap:8px;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;scroll-padding:0 var(--pad);padding:24px var(--pad) 28px;margin:-24px 0 -28px;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.arrow{position:absolute;top:0;bottom:0;width:var(--pad);min-width:44px;z-index:5;border:0;background:rgba(20,20,20,.6);color:#fff;cursor:pointer;opacity:0;transition:opacity .2s,background-color .2s;display:grid;place-items:center}
+.arrow svg{width:30px;height:30px;transition:transform .2s}
+.arrow:hover svg{transform:scale(1.25)}
+.arrow.prev{left:0}.arrow.next{right:0}
+.slider:hover .arrow,.arrow:focus-visible{opacity:1}
+.arrow[hidden]{display:none}
+@media (hover:none){.arrow{display:none}}
 
-/* sections */
-section{padding:72px 0;scroll-margin-top:64px}
-@media (max-width:600px){section{padding:48px 0}}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:36px;flex-wrap:wrap}
-h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.5vw,48px);letter-spacing:-.03em;line-height:1;margin:0}
-.sec-head p{color:var(--muted);margin:0;max-width:44ch}
+/* title cards */
+.card{flex:0 0 clamp(250px,23vw,340px);scroll-snap-align:start;background:none;border:0;padding:0;text-align:left;color:inherit;font:inherit;cursor:pointer;position:relative;border-radius:6px;transition:transform .3s ease,z-index 0s .3s;z-index:1}
+.poster{aspect-ratio:16/9;border-radius:6px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:14px 16px;background:var(--g,#333)}
+.poster::before{content:attr(data-mono);position:absolute;right:-8px;bottom:-22%;font-family:var(--logo);font-size:150px;line-height:1;color:rgba(255,255,255,.12)}
+.poster::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.65),transparent 60%)}
+.poster h3{position:relative;z-index:1;margin:0;font-family:var(--logo);font-weight:400;font-size:clamp(26px,2.3vw,34px);line-height:.95;letter-spacing:.02em;text-shadow:0 2px 10px rgba(0,0,0,.5);max-width:90%}
+.poster .badge{position:absolute;z-index:2;top:0;left:12px;background:var(--red);font-family:var(--logo);font-size:13px;line-height:1;padding:7px 5px 5px;text-align:center;border-radius:0 0 3px 3px;letter-spacing:.03em}
+.poster .corner{position:absolute;z-index:2;top:10px;right:10px;font-family:var(--logo);color:var(--red);font-size:22px;line-height:1;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.card .peek{position:absolute;left:0;right:0;top:calc(100% - 6px);background:var(--bg-2);border-radius:0 0 6px 6px;padding:12px 14px 14px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;box-shadow:0 14px 24px rgba(0,0,0,.6)}
+.peek .ctl{display:flex;gap:8px;margin-bottom:10px}
+.peek .ctl span{width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,.5);display:grid;place-items:center}
+.peek .ctl span:first-child{background:#fff;border-color:#fff;color:#000}
+.peek .ctl span:last-child{margin-left:auto}
+.peek .ctl svg{width:16px;height:16px}
+.peek .m{font-size:13px;color:var(--soft);display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+.peek .m .match{color:var(--green);font-weight:700}
+.peek .g{font-size:12.5px;color:#fff;display:flex;flex-wrap:wrap;gap:4px 0}
+.peek .g span+span::before{content:"•";color:#646464;margin:0 6px}
+@media (hover:hover) and (min-width:700px){
+  .card:hover,.card:focus-visible{transform:scale(1.18) translateY(-14%);z-index:20;transition:transform .3s ease .35s,z-index 0s}
+  .card:hover .poster,.card:focus-visible .poster{border-radius:6px 6px 0 0}
+  .card:hover .peek,.card:focus-visible .peek{opacity:1;visibility:visible;transition-delay:.35s}
+  .track > .card:first-child:hover,.track > .card:first-child:focus-visible{transform-origin:left center}
+  .track > .card:last-child:hover,.track > .card:last-child:focus-visible{transform-origin:right center}
+  .track:has(.card:hover){padding-bottom:130px;margin-bottom:-130px}
+}
+.card:focus-visible{outline:none}
+.card:focus-visible .poster{outline:2px solid #fff;outline-offset:2px}
 
-/* about */
-.about{display:grid;grid-template-columns:1.3fr 1fr;gap:56px}
-@media (max-width:860px){.about{grid-template-columns:1fr;gap:32px}}
-.about p{margin:0 0 18px;max-width:62ch}
-.facts{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:8px 24px}
-.facts div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15.5px}
-.facts div:last-child{border-bottom:0}
-.facts dt{color:var(--muted)}
-.facts dd{margin:0;text-align:right;font-weight:500}
+/* experience episodes */
+.wrap{padding:0 var(--pad)}
+.episodes{list-style:none;margin:0;padding:0;max-width:1100px;border-top:1px solid var(--line)}
+.ep{display:grid;grid-template-columns:52px minmax(130px,200px) 1fr;gap:20px;align-items:start;padding:24px 18px;border-bottom:1px solid var(--line);border-radius:6px;transition:background-color .2s}
+.ep:hover{background:#1e1e1e}
+.ep .num{font-size:28px;color:var(--soft);text-align:center;padding-top:18px}
+.ep .thumb{aspect-ratio:16/9;border-radius:4px;background:var(--g);display:grid;place-items:center;font-family:var(--logo);font-size:34px;letter-spacing:.04em;position:relative;overflow:hidden}
+.ep .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.12),transparent 55%)}
+.ep-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.ep h3{margin:0;font-size:17px;font-weight:700}
+.ep time{color:var(--soft);font-size:14px;white-space:nowrap}
+.ep .org{color:var(--muted);font-size:14px;margin:2px 0 10px}
+.ep ul{margin:0;padding-left:18px;color:var(--soft);font-size:15px;max-width:76ch}
+.ep li{margin-bottom:6px}
+@media (max-width:700px){.ep{grid-template-columns:1fr;gap:12px;padding:20px 4px}.ep .num{display:none}.ep .thumb{max-width:220px}}
 
-/* flagship */
-.flagship{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:40px;display:grid;grid-template-columns:1.25fr 1fr;gap:44px;margin-bottom:24px}
-@media (max-width:860px){.flagship{grid-template-columns:1fr;padding:28px 22px;gap:28px}}
-.flagship h3{font-family:var(--display);font-size:clamp(26px,3vw,34px);letter-spacing:-.02em;line-height:1.1;margin:0 0 6px}
-.flagship .where{color:var(--muted);margin:0 0 20px;font-size:15px}
-.flagship p{margin:0 0 16px;max-width:58ch}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start}
-.stat{border:1px solid var(--line);border-radius:16px;padding:18px}
-.stat b{display:block;font-family:var(--display);font-size:clamp(28px,3.4vw,38px);letter-spacing:-.03em;line-height:1;margin-bottom:6px}
-.stat span{color:var(--muted);font-size:14px;line-height:1.35;display:block}
-.stat.wide{grid-column:span 2;display:flex;align-items:center;gap:16px}
-.stat.wide b{margin:0}
-.flow{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:13.5px}
-.flow span{background:var(--bg);border-radius:999px;padding:4px 11px;color:var(--ink)}
+/* about / details */
+.about{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(24px,4vw,56px);max-width:1100px}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+.about p{margin:0 0 16px;color:var(--soft);max-width:64ch}
+.about p strong{color:#fff}
+.details{font-size:14.5px;color:var(--muted);margin:0}
+.details div{margin-bottom:12px}
+.details dt{display:inline;color:var(--muted)}
+.details dt::after{content:": "}
+.details dd{display:inline;margin:0;color:#fff}
 
-/* project list */
-.plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.plist li{display:grid;grid-template-columns:minmax(200px,1fr) 2fr auto;gap:32px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
-@media (max-width:860px){.plist li{grid-template-columns:1fr;gap:10px}}
-.plist h3{font-family:var(--display);font-size:22px;letter-spacing:-.015em;line-height:1.2;margin:0 0 6px}
-.plist .tech{color:var(--muted);font-size:14px;margin:0}
-.plist p{margin:0;max-width:60ch}
-.plist .badge{display:inline-block;margin-top:8px;font-size:13px;color:var(--c2);font-weight:600}
-.plist .links{display:flex;gap:10px;white-space:nowrap}
-.link{font-size:14.5px;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
-.link:hover{border-bottom-color:currentColor}
+/* skills as genres */
+.genres{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;max-width:1300px}
+.genre{background:var(--bg-2);border-radius:6px;padding:18px 20px;border-left:4px solid var(--c,var(--red))}
+.genre h3{margin:0 0 10px;font-size:15px;font-weight:700;letter-spacing:.02em}
+.genre p{margin:0;color:var(--soft);font-size:14.5px;line-height:1.7;display:flex;flex-wrap:wrap}
+.genre p span{white-space:nowrap}
+.genre p span+span::before{content:"•";color:#555;margin:0 7px}
+.edu{margin-top:12px;max-width:1300px;background:var(--bg-2);border-radius:6px;padding:20px;display:grid;grid-template-columns:1fr 1.3fr;gap:24px}
+@media (max-width:760px){.edu{grid-template-columns:1fr}}
+.edu h3{margin:0 0 4px;font-size:17px}
+.edu p{margin:0;color:var(--muted);font-size:14.5px}
+.edu .course{color:var(--soft)}
 
-/* experience */
-.timeline{list-style:none;margin:0;padding:0;position:relative}
-.timeline::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--line)}
-.timeline li{position:relative;padding:0 0 40px 44px}
-.timeline li:last-child{padding-bottom:0}
-.timeline li::before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
-.role{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline}
-.role h3{font-family:var(--display);font-size:22px;letter-spacing:-.015em;margin:0}
-.role time{color:var(--muted);font-size:15px}
-.org{color:var(--muted);margin:2px 0 12px}
-.timeline ul{margin:0;padding-left:18px;max-width:72ch}
-.timeline ul li{padding:0;margin:0 0 8px}
-.timeline ul li::before{display:none}
+/* contact CTA */
+.cta{margin:clamp(40px,6vw,80px) 0 0;padding:clamp(56px,9vw,110px) var(--pad);text-align:center;border-top:8px solid #222;border-bottom:8px solid #222;background:radial-gradient(70% 120% at 50% 0%,rgba(229,9,20,.22),transparent 65%),#000}
+.cta h2{font-size:clamp(30px,5vw,52px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0 0 14px}
+.cta p{font-size:clamp(17px,2vw,22px);color:var(--soft);margin:0 auto 26px;max-width:44ch}
+.cta .mail{display:flex;max-width:620px;margin:0 auto;gap:8px;flex-wrap:wrap;justify-content:center}
+.cta .addr{flex:1 1 280px;display:flex;align-items:center;padding:0 16px;min-height:56px;border:1px solid #5a5a5a;border-radius:4px;background:rgba(22,22,22,.7);color:var(--soft);font-size:16px;text-align:left;overflow-wrap:anywhere}
+.cta .btn{min-height:56px;font-size:clamp(17px,1.8vw,22px);padding:0 22px 0 26px}
+.cta .btn svg{width:20px;height:20px}
+.socials{display:flex;justify-content:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+.socials a{color:var(--soft);text-decoration:none;font-size:14.5px;border:1px solid #444;border-radius:999px;padding:7px 16px}
+.socials a:hover{color:#fff;border-color:#fff}
 
-/* skills */
-.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-@media (max-width:760px){.skills{grid-template-columns:1fr}}
-.skill{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px}
-.skill h3{font-family:var(--display);font-size:19px;margin:0 0 14px;letter-spacing:-.01em}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips span{border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:14.5px}
-.edu{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;grid-template-columns:1fr 1.4fr;gap:32px}
-@media (max-width:760px){.edu{grid-template-columns:1fr;gap:16px}}
-.edu h3{font-family:var(--display);font-size:22px;margin:0 0 4px;letter-spacing:-.015em}
-.edu p{margin:0;color:var(--muted)}
-.edu .course{color:var(--ink)}
+footer{padding:48px var(--pad) 56px;color:#808080;font-size:13px;max-width:1100px}
+footer .q{margin:0 0 22px;font-size:15px}
+footer ul{list-style:none;margin:0 0 22px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+footer a{text-decoration:none}
+footer a:hover{text-decoration:underline}
 
-/* contact */
-.contact{background:var(--accent);color:var(--accent-ink);border-radius:32px;padding:56px 48px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
-@media (max-width:860px){.contact{grid-template-columns:1fr;padding:36px 24px}}
-.contact h2{font-size:clamp(36px,6vw,64px)}
-.contact p{margin:16px 0 0;max-width:40ch;opacity:.9}
-.contact ul{list-style:none;margin:0;padding:0}
-.contact li a{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid color-mix(in srgb,var(--accent-ink) 30%,transparent);text-decoration:none;font-weight:600;font-size:17px}
-.contact li a span{opacity:.75;font-weight:400;overflow-wrap:anywhere;text-align:right}
-.contact li a:hover span{opacity:1}
-footer{padding:36px 0 48px;color:var(--muted);font-size:14px}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* ---------- details modal ---------- */
+dialog.modal{width:min(850px,calc(100% - 24px));max-height:calc(100% - 48px);margin:24px auto auto;padding:0;border:0;border-radius:8px;background:var(--bg-2);color:#fff;box-shadow:0 20px 60px rgba(0,0,0,.7);overflow:auto;overscroll-behavior:contain}
+dialog.modal::backdrop{background:rgba(0,0,0,.7)}
+dialog.modal[open]{animation:pop .3s ease}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.m-hero{aspect-ratio:16/7;position:relative;display:flex;align-items:flex-end;padding:0 clamp(18px,4vw,48px) clamp(18px,3vw,32px);background:var(--g);overflow:hidden}
+.m-hero::before{content:attr(data-mono);position:absolute;right:-10px;top:-30px;font-family:var(--logo);font-size:clamp(200px,34vw,340px);line-height:1;color:rgba(255,255,255,.1)}
+.m-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--bg-2),transparent 70%)}
+.m-hero h2{position:relative;z-index:1;margin:0 0 14px;font-family:var(--logo);font-weight:400;font-size:clamp(38px,6vw,64px);line-height:.9;letter-spacing:.02em}
+.m-hero .actions{position:relative;z-index:1}
+.m-close{position:absolute;top:14px;right:14px;z-index:3;width:38px;height:38px;border-radius:50%;border:0;background:var(--bg-2);color:#fff;cursor:pointer;display:grid;place-items:center}
+.m-close svg{width:20px;height:20px}
+.m-body{padding:4px clamp(18px,4vw,48px) clamp(24px,4vw,40px);display:grid;grid-template-columns:2fr 1fr;gap:28px}
+@media (max-width:640px){.m-body{grid-template-columns:1fr;gap:12px}.m-hero{aspect-ratio:4/3}}
+.m-body p{margin:0 0 14px;color:#e6e6e6}
+.m-body .meta{margin-bottom:12px}
+.m-side{font-size:14px;color:var(--muted)}
+.m-side div{margin-bottom:12px}
+.m-side b{font-weight:400;color:var(--muted)}
+.m-side span{color:#fff}
+.stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:6px}
+.stat{background:#262626;border-radius:6px;padding:16px}
+.stat b{display:block;font-family:var(--logo);font-weight:400;font-size:40px;line-height:1;color:#fff;letter-spacing:.02em}
+.stat span{color:var(--muted);font-size:13.5px;line-height:1.35;display:block;margin-top:4px}
+.flow{grid-column:1/-1}
+.flow h4{margin:8px 0 10px;font-size:18px}
+.flow ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;counter-reset:s}
+.flow li{counter-increment:s;background:#262626;border-radius:4px;padding:6px 12px;font-size:14px;color:var(--soft)}
+.flow li::before{content:counter(s);color:var(--red);font-weight:700;margin-right:8px}
 </style>
 </head>
 <body>
 
-<nav class="nav" id="nav">
-  <div class="wrap">
-    <a href="#top" class="brand">Brandon Gaona</a>
-    <ul>
-      <li class="hide-sm"><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li class="hide-sm"><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><button class="theme" id="theme" aria-label="Toggle dark mode">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      </button></li>
-    </ul>
+<!-- Profile gate -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <span class="logo" aria-hidden="true">BRANDON GAONA</span>
+  <h1 id="gate-title">Who's watching?</h1>
+  <ul class="profiles">
+    <li><button class="profile" data-go="#projects"><span class="avatar" style="background:#E50914"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></span><span>Recruiter</span></button></li>
+    <li><button class="profile" data-go="#experience"><span class="avatar" style="background:#1F6FEB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span>Hiring manager</span></button></li>
+    <li><button class="profile" data-go="#skills"><span class="avatar" style="background:#12A37A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span><span>Engineer</span></button></li>
+    <li><button class="profile" data-go="#about"><span class="avatar" style="background:#E8A317"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span>Just curious</span></button></li>
+    <li><button class="profile" data-go="#contact"><span class="avatar" style="background:#7B3FE4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span><span>Say hello</span></button></li>
+  </ul>
+  <button class="skip" data-go="#top">Browse everything</button>
+</div>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <a href="#top" class="logo">BRANDON GAONA</a>
+  <ul>
+    <li><a href="#top">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="right">
+    <button class="who" id="who" type="button" aria-label="Switch profile"><em>Profiles</em><i aria-hidden="true">B</i></button>
   </div>
 </nav>
 
-<main id="top">
-<header class="hero">
-  <div class="wrap">
-    <div>
-      <h1>Brandon<br>Gaona</h1>
-      <p class="lede">I study <strong>computer science and math</strong> at Stevens and build machine learning systems that have to be right, from federal complaint data to trading backtests.</p>
-      <div class="actions">
-        <a class="btn primary" href="#projects">See my projects</a>
-        <a class="btn" href="resume.pdf" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg>Resume
-        </a>
-        <a class="btn" href="https://github.com/brandongaona" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>GitHub
-        </a>
-      </div>
+<header class="billboard" id="top">
+  <div class="art" aria-hidden="true"></div>
+  <div class="bb-inner">
+    <div class="series"><b>B</b>PORTFOLIO</div>
+    <h1>Brandon<br>Gaona</h1>
+    <div class="top10"><i>TOP<br>10</i>Now hiring for Summer 2027</div>
+    <div class="meta">
+      <span class="match">3.8 GPA</span><span>Class of 2028</span><span class="tag">CS + MATH</span><span>Hoboken, NJ</span>
     </div>
-    <figure class="figure">
-      <canvas id="clusters" aria-label="Animated scatter plot of points sorting themselves into clusters" role="img"></canvas>
-      <figcaption>
-        <span>A small version of what my FCC pipeline did: unlabeled points finding their categories.</span>
-        <button id="replay" type="button">Replay</button>
-      </figcaption>
-    </figure>
+    <p class="lede">I study computer science and math at Stevens and build machine learning systems that have to be right, from federal complaint data to trading backtests.</p>
+    <div class="actions">
+      <a class="btn play" href="#projects"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>Projects</a>
+      <a class="btn info" href="resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01" stroke-linecap="round"/></svg>Resume</a>
+    </div>
   </div>
 </header>
 
-<section id="about">
+<main>
+
+<section class="row" id="projects" aria-labelledby="projects-h">
+  <div class="row-head"><h2 id="projects-h">Projects</h2><a class="explore" href="https://github.com/brandongaona" target="_blank" rel="noopener">Explore all on GitHub ›</a></div>
+  <div class="slider">
+    <button class="arrow prev" aria-label="Scroll left" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div class="track">
+      <button class="card" data-detail="d-fcc" style="--g:linear-gradient(135deg,#7a0a10,#E50914 55%,#ff6a3d)">
+        <div class="poster" data-mono="ML"><span class="badge">TOP<br>PICK</span><h3>Consumer Complaint Intelligence</h3></div>
+        <div class="peek"><div class="ctl"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          <div class="m"><span class="match">93.7% accuracy</span><span>Summer 2026</span></div>
+          <div class="g"><span>NLP</span><span>Clustering</span><span>Fraud detection</span></div></div>
+      </button>
+      <button class="card" data-detail="d-uncover" style="--g:linear-gradient(135deg,#0b3d2e,#12A37A 60%,#7ee0b5)">
+        <div class="poster" data-mono="U"><span class="corner">NEW</span><h3>Uncover</h3></div>
+        <div class="peek"><div class="ctl"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          <div class="m"><span class="match">Hackathon</span><span>2026</span></div>
+          <div class="g"><span>Next.js</span><span>Supabase</span><span>Real-time</span></div></div>
+      </button>
+      <button class="card" data-detail="d-cpu" style="--g:linear-gradient(135deg,#10203f,#1F6FEB 60%,#6cb2ff)">
+        <div class="poster" data-mono="8"><h3>Custom 8-Bit CPU &amp; Assembly</h3></div>
+        <div class="peek"><div class="ctl"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          <div class="m"><span class="match">20+ test programs</span><span>CS 382</span></div>
+          <div class="g"><span>Hardware</span><span>Assembler</span><span>Python</span></div></div>
+      </button>
+      <button class="card" data-detail="d-backtest" style="--g:linear-gradient(135deg,#3a2600,#E8A317 60%,#ffd36b)">
+        <div class="poster" data-mono="$"><h3>Trading Backtest Dashboard</h3></div>
+        <div class="peek"><div class="ctl"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          <div class="m"><span class="match">1,000+ trading days</span></div>
+          <div class="g"><span>FastAPI</span><span>PostgreSQL</span><span>Docker</span></div></div>
+      </button>
+      <button class="card" data-detail="d-health" style="--g:linear-gradient(135deg,#3b0a2a,#C2185B 60%,#ff7aa8)">
+        <div class="poster" data-mono="H"><h3>Health Tracker</h3></div>
+        <div class="peek"><div class="ctl"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          <div class="m"><span class="match">USDA data</span></div>
+          <div class="g"><span>C++</span><span>JavaScript</span><span>APIs</span></div></div>
+      </button>
+      <button class="card" data-detail="d-spotify" style="--g:linear-gradient(135deg,#1e0f45,#7B3FE4 60%,#c2a3ff)">
+        <div class="poster" data-mono="♪"><h3>Spotify to YouTube Playlist</h3></div>
+        <div class="peek"><div class="ctl"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          <div class="m"><span class="match">OAuth 2.0</span></div>
+          <div class="g"><span>Python</span><span>Flask</span><span>APIs</span></div></div>
+      </button>
+    </div>
+    <button class="arrow next" aria-label="Scroll right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></button>
+  </div>
+</section>
+
+<section class="row" id="experience" aria-labelledby="exp-h">
+  <div class="row-head"><h2 id="exp-h">Experience</h2><a class="explore" href="resume.pdf" target="_blank" rel="noopener">Full resume (PDF) ›</a></div>
   <div class="wrap">
-    <div class="sec-head"><h2>About</h2></div>
+    <ol class="episodes">
+      <li class="ep">
+        <div class="num">1</div>
+        <div class="thumb" style="--g:linear-gradient(135deg,#7a0a10,#E50914)">FCC</div>
+        <div>
+          <div class="ep-top"><h3>Machine Learning Intern</h3><time>June – Aug 2026</time></div>
+          <p class="org">Federal Communications Commission, Office of Economics &amp; Analytics · Washington, DC</p>
+          <ul>
+            <li>Built and deployed an end-to-end Python ML pipeline (NLP, scikit-learn, FAISS, Flask) as sole developer, processing 373,000+ consumer complaints at 93.7% classification accuracy and identifying 49,000+ duplicate or fraudulent submissions.</li>
+            <li>Reduced false-positive data-quality flags from 79% to 7–8% and cut false fraud alerts from 150+ to 25 through signal recalibration.</li>
+            <li>Co-developed a Microsoft Copilot prompt engineering library adopted by FCC economists to speed up report drafting.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="ep">
+        <div class="num">2</div>
+        <div class="thumb" style="--g:linear-gradient(135deg,#3a2600,#E8A317)">SHIFT</div>
+        <div>
+          <div class="ep-top"><h3>SHIFT Research Assistant</h3><time>Sept 2025 – May 2026</time></div>
+          <p class="org">Hanlon Financial Systems Center, Stevens · Hoboken, NJ</p>
+          <ul>
+            <li>Researched and backtested AMM ETF strategies across 10,000+ historical data points per asset, modeling volatility, returns, and portfolio efficiency.</li>
+            <li>Benchmarked strategies against traditional ETFs with statistical analysis, surfacing differences of up to 15–25% in simulated returns.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="ep">
+        <div class="num">3</div>
+        <div class="thumb" style="--g:linear-gradient(135deg,#10203f,#1F6FEB)">GDF</div>
+        <div>
+          <div class="ep-top"><h3>Web Development Intern</h3><time>May 2024 – Aug 2025</time></div>
+          <p class="org">GDF Capital Inc · Doylestown, PA</p>
+          <ul>
+            <li>Developed the company website in HTML, CSS, and JavaScript with dynamic content and form handling, supporting 100+ user interactions per session.</li>
+            <li>Optimized frontend performance and asset delivery, cutting page load times by more than 40%.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="row" id="about" aria-labelledby="about-h">
+  <div class="row-head"><h2 id="about-h">About Brandon</h2></div>
+  <div class="wrap">
     <div class="about">
       <div>
-        <p>I'm a double major in Computer Science and Mathematics at Stevens Institute of Technology in Hoboken, graduating in May 2028. I like problems where the math matters as much as the code: classification models that people make decisions from, trading strategies that need honest backtests, and low-level systems where every bit is accounted for.</p>
+        <p>I'm a double major in <strong>Computer Science and Mathematics</strong> at Stevens Institute of Technology in Hoboken, graduating in May 2028. I like problems where the math matters as much as the code: classification models that people make decisions from, trading strategies that need honest backtests, and low-level systems where every bit is accounted for.</p>
         <p>This past summer I was the sole developer on a machine learning pipeline at the FCC's Office of Economics &amp; Analytics, which sorted more than 373,000 consumer complaints and flagged tens of thousands of duplicates. Before that I did quantitative research on ETF strategies at Stevens' Hanlon Financial Systems Center and built production websites at GDF Capital.</p>
-        <p>I'm looking for Summer 2027 internships in applied AI and machine learning, especially in fields where accuracy is non-negotiable. I'm also fluent in Spanish.</p>
+        <p>I'm looking for <strong>Summer 2027 internships in applied AI and machine learning</strong>, especially in fields where accuracy is non-negotiable. I'm also fluent in Spanish.</p>
       </div>
-      <dl class="facts">
-        <div><dt>Studying</dt><dd>B.S. CS + B.S. Math</dd></div>
+      <dl class="details">
+        <div><dt>Studying</dt><dd>B.S. Computer Science, B.S. Mathematics</dd></div>
         <div><dt>School</dt><dd>Stevens Institute of Technology</dd></div>
         <div><dt>Graduating</dt><dd>May 2028</dd></div>
         <div><dt>GPA</dt><dd>3.8</dd></div>
         <div><dt>Based in</dt><dd>Hoboken, NJ</dd></div>
+        <div><dt>Languages</dt><dd>English, Spanish</dd></div>
         <div><dt>Looking for</dt><dd>Summer 2027 AI/ML internships</dd></div>
       </dl>
     </div>
   </div>
 </section>
 
-<section id="projects">
+<section class="row" id="skills" aria-labelledby="skills-h">
+  <div class="row-head"><h2 id="skills-h">Browse by genre</h2></div>
   <div class="wrap">
-    <div class="sec-head">
-      <h2>Projects</h2>
-      <p>Work from internships, hackathons, and courses. Most of the code is on GitHub.</p>
-    </div>
-
-    <article class="flagship">
-      <div>
-        <h3>Consumer Complaint Intelligence Pipeline</h3>
-        <p class="where">Federal Communications Commission, Summer 2026 · Python, spaCy, scikit-learn, FAISS, Flask</p>
-        <p>A 5-layer, 15-stage pipeline I designed and built alone to make sense of hundreds of thousands of free-text complaints filed with the FCC. It embeds each complaint, reduces dimensions with PCA, clusters them into 25 categories, and feeds an interactive dashboard that economists used to explore the data.</p>
-        <p>A supervised classifier assigns new complaints to categories, and a fraud-detection layer catches duplicate and coordinated submissions. Recalibrating the anomaly signals took false data-quality flags from 79% down to 7–8%.</p>
-        <div class="flow" aria-label="Pipeline stages">
-          <span>Ingest</span><span>Clean</span><span>Embed</span><span>PCA</span><span>Cluster</span><span>Classify</span><span>Detect fraud</span><span>Dashboard</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><b>373k+</b><span>complaints processed</span></div>
-        <div class="stat"><b>93.7%</b><span>held-out accuracy, 0.938 macro-F1</span></div>
-        <div class="stat"><b>49k+</b><span>duplicate or fraudulent submissions found</span></div>
-        <div class="stat"><b>150 → 25</b><span>false fraud alerts after recalibration</span></div>
-        <div class="stat wide"><b>25</b><span>categories discovered by clustering sentence embeddings</span></div>
-      </div>
-    </article>
-
-    <ul class="plist">
-      <li>
-        <div>
-          <h3>Uncover</h3>
-          <p class="tech">Next.js, React, TypeScript, Supabase</p>
-          <span class="badge">Stevens QuackHacks 2026</span>
-        </div>
-        <p>A fog-of-war exploration platform where the map reveals itself as you visit places. I built the authenticated leaderboard API, with real-time rankings across 100+ users, deterministic tie-breaking, and time-windowed boards on Supabase PostgreSQL with row-level security. The API schema is decoupled from the database so the frontend and backend could move independently.</p>
-        <div class="links"><a class="link" href="https://github.com/Alvaro-bit-stack/Uncover" target="_blank" rel="noopener">Code</a></div>
-      </li>
-      <li>
-        <div>
-          <h3>Custom 8-Bit CPU &amp; Assembly Language</h3>
-          <p class="tech">CPU design, Python</p>
-          <span class="badge">CS 382, Computer Architecture</span>
-        </div>
-        <p>A single-cycle 8-bit CPU with a program counter, control unit, ALU, register file, and memory, running a minimal ISA with 2-bit opcodes. We also wrote our own assembly language and a Python assembler that compiles it to machine code, then ran 20+ test programs in hardware simulation.</p>
-        <div class="links"><a class="link" href="https://github.com/zidankazi/yo-cpu" target="_blank" rel="noopener">Code</a></div>
-      </li>
-      <li>
-        <div>
-          <h3>Trading Backtest Dashboard</h3>
-          <p class="tech">FastAPI, PostgreSQL, Python, JavaScript, Docker</p>
-        </div>
-        <p>A full-stack platform that runs trading strategies, starting with SMA crossover, over multi-year datasets of 1,000+ trading days and returns performance metrics through a REST API. Data ingestion uses fully idempotent upserts and smarter missing-data handling, so reruns never make redundant API calls.</p>
-        <div class="links"><a class="link" href="https://github.com/brandongaona/backtest-dashboard" target="_blank" rel="noopener">Code</a></div>
-      </li>
-      <li>
-        <div>
-          <h3>Health Tracker</h3>
-          <p class="tech">C++, JavaScript, USDA FoodData Central API</p>
-        </div>
-        <p>A calorie and macro calculator with a C++ backend and JavaScript frontend. It pulls nutrition data from the USDA FoodData Central API and recommends foods based on each person's fitness goals.</p>
-        <div class="links"><a class="link" href="https://github.com/brandongaona/Health-Tracker" target="_blank" rel="noopener">Code</a></div>
-      </li>
-      <li>
-        <div>
-          <h3>Spotify to YouTube Playlist</h3>
-          <p class="tech">Python, Flask, OAuth 2.0</p>
-        </div>
-        <p>A Flask app that signs into both Spotify and YouTube with OAuth 2.0, reads your liked songs from the Spotify Web API, and builds a matching playlist through the YouTube Data API.</p>
-        <div class="links"><a class="link" href="https://github.com/brandongaona/spotify-to-youtube-playlist" target="_blank" rel="noopener">Code</a></div>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>Experience</h2>
-      <p><a class="link" href="resume.pdf" target="_blank" rel="noopener">Download the full resume (PDF)</a></p>
-    </div>
-    <ol class="timeline">
-      <li>
-        <div class="role"><h3>Machine Learning Intern</h3><time>June – Aug 2026</time></div>
-        <p class="org">Federal Communications Commission, Office of Economics &amp; Analytics · Washington, DC</p>
-        <ul>
-          <li>Built and deployed an end-to-end Python ML pipeline (NLP, scikit-learn, FAISS, Flask) as sole developer, processing 373,000+ consumer complaints at 93.7% classification accuracy and identifying 49,000+ duplicate or fraudulent submissions.</li>
-          <li>Reduced false-positive data-quality flags from 79% to 7–8% and cut false fraud alerts from 150+ to 25 through signal recalibration.</li>
-          <li>Co-developed a Microsoft Copilot prompt engineering library adopted by FCC economists to speed up report drafting.</li>
-        </ul>
-      </li>
-      <li>
-        <div class="role"><h3>SHIFT Research Assistant</h3><time>Sept 2025 – May 2026</time></div>
-        <p class="org">Hanlon Financial Systems Center, Stevens · Hoboken, NJ</p>
-        <ul>
-          <li>Researched and backtested AMM ETF strategies across 10,000+ historical data points per asset, modeling volatility, returns, and portfolio efficiency.</li>
-          <li>Benchmarked strategies against traditional ETFs with statistical analysis, surfacing differences of up to 15–25% in simulated returns.</li>
-        </ul>
-      </li>
-      <li>
-        <div class="role"><h3>Web Development Intern</h3><time>May 2024 – Aug 2025</time></div>
-        <p class="org">GDF Capital Inc · Doylestown, PA</p>
-        <ul>
-          <li>Developed the company website in HTML, CSS, and JavaScript with dynamic content and form handling, supporting 100+ user interactions per session.</li>
-          <li>Optimized frontend performance and asset delivery, cutting page load times by more than 40%.</li>
-        </ul>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-head"><h2>Skills &amp; education</h2></div>
-    <div class="skills">
-      <div class="skill"><h3>Languages</h3><div class="chips"><span>Python</span><span>Java</span><span>C</span><span>C++</span><span>TypeScript</span><span>JavaScript</span><span>OCaml</span><span>R</span><span>Bash</span><span>Assembly</span><span>HTML/CSS</span></div></div>
-      <div class="skill"><h3>Machine learning &amp; data</h3><div class="chips"><span>scikit-learn</span><span>spaCy</span><span>FAISS</span><span>NLP</span><span>Clustering</span><span>Statistical analysis</span><span>Quantitative modeling</span><span>Backtesting</span><span>Jupyter</span></div></div>
-      <div class="skill"><h3>Web &amp; backend</h3><div class="chips"><span>React</span><span>Next.js</span><span>Node.js</span><span>Flask</span><span>FastAPI</span><span>REST APIs</span><span>OAuth 2.0</span><span>PostgreSQL</span><span>Supabase</span></div></div>
-      <div class="skill"><h3>Tools</h3><div class="chips"><span>Git</span><span>Linux</span><span>Docker</span><span>AWS</span><span>Vercel</span></div></div>
+    <div class="genres">
+      <div class="genre" style="--c:#E50914"><h3>Languages</h3><p><span>Python</span><span>Java</span><span>C</span><span>C++</span><span>TypeScript</span><span>JavaScript</span><span>OCaml</span><span>R</span><span>Bash</span><span>Assembly</span><span>HTML/CSS</span></p></div>
+      <div class="genre" style="--c:#12A37A"><h3>Machine learning &amp; data</h3><p><span>scikit-learn</span><span>spaCy</span><span>FAISS</span><span>NLP</span><span>Clustering</span><span>Statistical analysis</span><span>Quantitative modeling</span><span>Backtesting</span><span>Jupyter</span></p></div>
+      <div class="genre" style="--c:#1F6FEB"><h3>Web &amp; backend</h3><p><span>React</span><span>Next.js</span><span>Node.js</span><span>Flask</span><span>FastAPI</span><span>REST APIs</span><span>OAuth 2.0</span><span>PostgreSQL</span><span>Supabase</span></p></div>
+      <div class="genre" style="--c:#E8A317"><h3>Tools</h3><p><span>Git</span><span>Linux</span><span>Docker</span><span>AWS</span><span>Vercel</span></p></div>
     </div>
     <div class="edu">
       <div>
@@ -347,91 +411,207 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
-<section id="contact">
-  <div class="wrap">
-    <div class="contact">
-      <div>
-        <h2>Let's talk</h2>
-        <p>I'm open to Summer 2027 internships in applied AI, ML, and quantitative work. Email is the fastest way to reach me.</p>
-      </div>
-      <ul>
-        <li><a href="mailto:brandon.gaona@outlook.com">Email <span>brandon.gaona@outlook.com</span></a></li>
-        <li><a href="https://www.linkedin.com/in/brandongaona" target="_blank" rel="noopener">LinkedIn <span>in/brandongaona</span></a></li>
-        <li><a href="https://github.com/brandongaona" target="_blank" rel="noopener">GitHub <span>brandongaona</span></a></li>
-        <li><a href="resume.pdf" target="_blank" rel="noopener">Resume <span>PDF</span></a></li>
-      </ul>
-    </div>
+<section class="cta" id="contact" aria-labelledby="contact-h">
+  <h2 id="contact-h">Ready to work together?</h2>
+  <p>I'm open to Summer 2027 internships in applied AI, ML, and quantitative work. Email is the fastest way to reach me.</p>
+  <div class="mail">
+    <span class="addr">brandon.gaona@outlook.com</span>
+    <a class="btn red" href="mailto:brandon.gaona@outlook.com">Get in touch<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg></a>
+  </div>
+  <div class="socials">
+    <a href="https://www.linkedin.com/in/brandongaona" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/brandongaona" target="_blank" rel="noopener">GitHub</a>
+    <a href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
   </div>
 </section>
 </main>
 
-<footer><div class="wrap"><span>© <span id="yr">2026</span> Brandon Gaona</span><span>Built by hand, hosted on Vercel</span></div></footer>
+<footer>
+  <p class="q">Questions? <a href="mailto:brandon.gaona@outlook.com">brandon.gaona@outlook.com</a></p>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="https://github.com/brandongaona" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/brandongaona" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
+  <span>© <span id="yr">2026</span> Brandon Gaona · Built by hand, hosted on Vercel</span>
+</footer>
+
+<!-- Project details (shown in the modal) -->
+<template id="d-fcc">
+  <div class="m-hero" data-mono="ML" style="--g:linear-gradient(135deg,#7a0a10,#E50914 55%,#ff6a3d)">
+    <div><h2>Consumer Complaint Intelligence Pipeline</h2></div>
+  </div>
+  <div class="m-body">
+    <div>
+      <div class="meta"><span class="match">93.7% accuracy</span><span>Summer 2026</span><span class="tag">SOLE DEV</span></div>
+      <p>A 5-layer, 15-stage pipeline I designed and built alone at the Federal Communications Commission to make sense of hundreds of thousands of free-text consumer complaints. It embeds each complaint, reduces dimensions with PCA, clusters them into 25 categories, and feeds an interactive dashboard that economists used to explore the data.</p>
+      <p>A supervised classifier assigns new complaints to categories, and a fraud-detection layer catches duplicate and coordinated submissions. Recalibrating the anomaly signals took false data-quality flags from 79% down to 7–8%.</p>
+    </div>
+    <div class="m-side">
+      <div><b>Where: </b><span>FCC, Office of Economics &amp; Analytics</span></div>
+      <div><b>Stack: </b><span>Python, spaCy, scikit-learn, FAISS, Flask</span></div>
+      <div><b>Genres: </b><span>NLP, Clustering, Fraud detection</span></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>373K+</b><span>complaints processed</span></div>
+      <div class="stat"><b>0.938</b><span>macro-F1 on held-out data</span></div>
+      <div class="stat"><b>49K+</b><span>duplicate or fraudulent submissions found</span></div>
+      <div class="stat"><b>150 → 25</b><span>false fraud alerts after recalibration</span></div>
+      <div class="stat"><b>25</b><span>categories discovered by clustering embeddings</span></div>
+    </div>
+    <div class="flow">
+      <h4>Pipeline</h4>
+      <ol><li>Ingest</li><li>Clean</li><li>Embed</li><li>PCA</li><li>Cluster</li><li>Classify</li><li>Detect fraud</li><li>Dashboard</li></ol>
+    </div>
+  </div>
+</template>
+
+<template id="d-uncover">
+  <div class="m-hero" data-mono="U" style="--g:linear-gradient(135deg,#0b3d2e,#12A37A 60%,#7ee0b5)">
+    <div><h2>Uncover</h2><div class="actions"><a class="btn play" href="https://github.com/Alvaro-bit-stack/Uncover" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>View code</a></div></div>
+  </div>
+  <div class="m-body">
+    <div>
+      <div class="meta"><span class="match">Hackathon build</span><span>2026</span><span class="tag">TEAM</span></div>
+      <p>A fog-of-war exploration platform where the map reveals itself as you visit places. I built the authenticated leaderboard API, with real-time rankings across 100+ users, deterministic tie-breaking, and time-windowed boards on Supabase PostgreSQL with row-level security.</p>
+      <p>The API schema is decoupled from the database so the frontend and backend could move independently.</p>
+    </div>
+    <div class="m-side">
+      <div><b>Event: </b><span>Stevens QuackHacks 2026</span></div>
+      <div><b>Stack: </b><span>Next.js, React, TypeScript, Supabase</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="d-cpu">
+  <div class="m-hero" data-mono="8" style="--g:linear-gradient(135deg,#10203f,#1F6FEB 60%,#6cb2ff)">
+    <div><h2>Custom 8-Bit CPU &amp; Assembly Language</h2><div class="actions"><a class="btn play" href="https://github.com/zidankazi/yo-cpu" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>View code</a></div></div>
+  </div>
+  <div class="m-body">
+    <div>
+      <div class="meta"><span class="match">20+ test programs</span><span class="tag">COURSE</span></div>
+      <p>A single-cycle 8-bit CPU with a program counter, control unit, ALU, register file, and memory, running a minimal ISA with 2-bit opcodes.</p>
+      <p>We also wrote our own assembly language and a Python assembler that compiles it to machine code, then ran 20+ test programs in hardware simulation.</p>
+    </div>
+    <div class="m-side">
+      <div><b>Course: </b><span>CS 382, Computer Architecture</span></div>
+      <div><b>Stack: </b><span>CPU design, Python</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="d-backtest">
+  <div class="m-hero" data-mono="$" style="--g:linear-gradient(135deg,#3a2600,#E8A317 60%,#ffd36b)">
+    <div><h2>Trading Backtest Dashboard</h2><div class="actions"><a class="btn play" href="https://github.com/brandongaona/backtest-dashboard" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>View code</a></div></div>
+  </div>
+  <div class="m-body">
+    <div>
+      <div class="meta"><span class="match">1,000+ trading days</span><span class="tag">FULL STACK</span></div>
+      <p>A full-stack platform that runs trading strategies, starting with SMA crossover, over multi-year datasets and returns performance metrics through a REST API.</p>
+      <p>Data ingestion uses fully idempotent upserts and smarter missing-data handling, so reruns never make redundant API calls.</p>
+    </div>
+    <div class="m-side">
+      <div><b>Stack: </b><span>FastAPI, PostgreSQL, Python, JavaScript, Docker</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="d-health">
+  <div class="m-hero" data-mono="H" style="--g:linear-gradient(135deg,#3b0a2a,#C2185B 60%,#ff7aa8)">
+    <div><h2>Health Tracker</h2><div class="actions"><a class="btn play" href="https://github.com/brandongaona/Health-Tracker" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>View code</a></div></div>
+  </div>
+  <div class="m-body">
+    <div>
+      <div class="meta"><span class="match">USDA FoodData Central</span></div>
+      <p>A calorie and macro calculator with a C++ backend and JavaScript frontend. It pulls nutrition data from the USDA FoodData Central API and recommends foods based on each person's fitness goals.</p>
+    </div>
+    <div class="m-side">
+      <div><b>Stack: </b><span>C++, JavaScript, USDA API</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="d-spotify">
+  <div class="m-hero" data-mono="♪" style="--g:linear-gradient(135deg,#1e0f45,#7B3FE4 60%,#c2a3ff)">
+    <div><h2>Spotify to YouTube Playlist</h2><div class="actions"><a class="btn play" href="https://github.com/brandongaona/spotify-to-youtube-playlist" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>View code</a></div></div>
+  </div>
+  <div class="m-body">
+    <div>
+      <div class="meta"><span class="match">OAuth 2.0</span></div>
+      <p>A Flask app that signs into both Spotify and YouTube with OAuth 2.0, reads your liked songs from the Spotify Web API, and builds a matching playlist through the YouTube Data API.</p>
+    </div>
+    <div class="m-side">
+      <div><b>Stack: </b><span>Python, Flask, Spotify Web API, YouTube Data API</span></div>
+    </div>
+  </div>
+</template>
+
+<dialog class="modal" id="modal" aria-label="Project details">
+  <button class="m-close" id="m-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <div id="m-content"></div>
+</dialog>
 
 <script>
-// theme toggle
 (function(){
-  const root=document.documentElement, key='theme';
-  try{const s=localStorage.getItem(key); if(s) root.dataset.theme=s;}catch(e){}
-  document.getElementById('theme').addEventListener('click',()=>{
-    const dark = root.dataset.theme ? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    root.dataset.theme = dark ? 'light' : 'dark';
-    try{localStorage.setItem(key,root.dataset.theme);}catch(e){}
-    window.dispatchEvent(new Event('themechange'));
-  });
-  document.getElementById('yr').textContent=new Date().getFullYear();
-  const nav=document.getElementById('nav');
-  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
-})();
+  document.getElementById('yr').textContent = new Date().getFullYear();
 
-// cluster animation
-(function(){
-  const cv=document.getElementById('clusters'), ctx=cv.getContext('2d');
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const N=520, K=5; let pts=[], centers=[], W=0, H=0, t0=0, raf=0;
-  const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-  let colors=[];
-  function readColors(){colors=['--c1','--c2','--c3','--c4','--c5'].map(css); colors.noise=css('--noise');}
-  function rand(a,b){return a+Math.random()*(b-a)}
-  function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
-  function size(){
-    const r=cv.getBoundingClientRect(), d=devicePixelRatio||1;
-    W=r.width; H=r.height; cv.width=W*d; cv.height=H*d; ctx.setTransform(d,0,0,d,0,0);
+  // nav: solid background after scrolling
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('solid', scrollY > 40);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // profile gate ("Who's watching?") — once per browser session
+  const gate = document.getElementById('gate');
+  let seen = false;
+  try { seen = sessionStorage.getItem('gate') === '1'; } catch(e){}
+  function openGate(){
+    gate.classList.remove('leaving'); gate.classList.add('show');
+    document.body.classList.add('locked');
+    gate.querySelector('.profile').focus();
   }
-  function seed(){
-    centers=[[.27,.3],[.72,.24],[.5,.62],[.2,.76],[.8,.72]].map(([x,y])=>({x:x*W,y:y*H}));
-    const spread=Math.min(W,H)*.075;
-    pts=Array.from({length:N},(_,i)=>{
-      const k=i%K, c=centers[k];
-      return {k, sx:rand(12,W-12), sy:rand(12,H-12),
-        tx:c.x+gauss()*spread, ty:c.y+gauss()*spread,
-        delay:Math.random()*.35, r:rand(1.8,3.2)};
-    });
+  function closeGate(target){
+    try { sessionStorage.setItem('gate','1'); } catch(e){}
+    gate.classList.add('leaving');
+    document.body.classList.remove('locked');
+    setTimeout(() => {
+      gate.classList.remove('show','leaving');
+      const el = document.querySelector(target);
+      if (el) el.scrollIntoView({behavior: target === '#top' ? 'auto' : 'smooth'});
+    }, 450);
   }
-  const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
-  function draw(now){
-    const p=reduce?1:Math.min(1,(now-t0)/2600);
-    ctx.clearRect(0,0,W,H);
-    for(const q of pts){
-      const local=Math.max(0,Math.min(1,(p-q.delay)/(1-q.delay)));
-      const e=ease(local);
-      const x=q.sx+(q.tx-q.sx)*e, y=q.sy+(q.ty-q.sy)*e;
-      ctx.globalAlpha=.35+.5*e;
-      ctx.fillStyle=e>.55?colors[q.k]:colors.noise;
-      ctx.beginPath(); ctx.arc(x,y,q.r,0,Math.PI*2); ctx.fill();
-    }
-    ctx.globalAlpha=1;
-    if(p<1) raf=requestAnimationFrame(draw);
-  }
-  function start(){cancelAnimationFrame(raf); size(); readColors(); seed(); t0=performance.now(); raf=requestAnimationFrame(draw);}
-  document.getElementById('replay').addEventListener('click',start);
-  let rt; addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(start,200)});
-  addEventListener('themechange',()=>{readColors(); t0=performance.now()-99999; draw(performance.now());});
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors(); t0=performance.now()-99999; draw(performance.now());});
-  // start when visible
-  if('IntersectionObserver' in window){
-    const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){start(); io.disconnect();}});
-    io.observe(cv);
-  } else start();
+  gate.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => closeGate(b.dataset.go)));
+  gate.addEventListener('keydown', e => { if (e.key === 'Escape') closeGate('#top'); });
+  document.getElementById('who').addEventListener('click', openGate);
+  if (!seen && !location.hash) openGate();
+
+  // row sliders
+  document.querySelectorAll('.slider').forEach(s => {
+    const track = s.querySelector('.track'), prev = s.querySelector('.prev'), next = s.querySelector('.next');
+    const update = () => {
+      prev.hidden = track.scrollLeft < 8;
+      next.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+    };
+    prev.addEventListener('click', () => track.scrollBy({left: -track.clientWidth * .85, behavior:'smooth'}));
+    next.addEventListener('click', () => track.scrollBy({left:  track.clientWidth * .85, behavior:'smooth'}));
+    track.addEventListener('scroll', update, {passive:true});
+    addEventListener('resize', update); update();
+  });
+
+  // details modal
+  const modal = document.getElementById('modal'), content = document.getElementById('m-content');
+  document.querySelectorAll('[data-detail]').forEach(card => card.addEventListener('click', () => {
+    const tpl = document.getElementById(card.dataset.detail);
+    content.replaceChildren(tpl.content.cloneNode(true));
+    modal.setAttribute('aria-label', tpl.content.querySelector('h2').textContent);
+    modal.showModal(); modal.scrollTop = 0;
+    document.body.classList.add('locked');
+  }));
+  document.getElementById('m-close').addEventListener('click', () => modal.close());
+  modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+  modal.addEventListener('close', () => document.body.classList.remove('locked'));
 })();
 </script>
 </body>
