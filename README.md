@@ -23,5 +23,5 @@ Every push to `main` redeploys automatically.
 
 - Projects: each project is a `.card` button in the Projects row plus a matching `<template id="d-...">` near the bottom of the page that holds the pop-up details. To add one, copy a card and a template and give them the same `data-detail` / `id`.
 - Experience: add an `<li class="ep">` to the `.episodes` list.
-- The "Who's watching?" screen shows once per browser session. Each tile's `data-go` sets the section it jumps to.
+- The welcome screen ("Log in as Brandon") shows once per browser session. Clicking the name button in the top bar brings it back.
 - Resume: replace `resume.pdf` with the new file under the same name.
